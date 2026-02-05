@@ -12,7 +12,11 @@ Alle snarveier er bygget med tanke på **robusthet**, **forutsigbarhet** og dagl
 
 ---
 
-## 🚀 Tilgjengelige snarveier
+## 🚀 Snarveier i dette repoet
+
+| Snarvei | Beskrivelse | Installer |
+|--------|------------|-----------|
+| 🚗 [Jobb pendling](docs/jobb-pendling.md) | Pendling med automatisk fokus, navigasjon og varsling | [Legg til](https://www.icloud.com/shortcuts/3ccad90c297e43a38471e101177ccf80) |
 
 Hver snarvei har egen dokumentasjon med:
 - Beskrivelse av funksjon og flyt
@@ -20,15 +24,7 @@ Hver snarvei har egen dokumentasjon med:
 - iCloud-lenke for enkel installasjon
 - Eventuelle krav og tillatelser
 
-👉 Se undermapper eller snarveiens README for detaljer.
-
----
-
-## 🚀 Snarveier i dette repoet
-
-| Snarvei | Beskrivelse | Installer |
-|--------|------------|-----------|
-| 🚗 [Jobb pendling](docs/jobb-pendling.md) | Pendling med automatisk fokus, navigasjon og varsling | [Legg til](https://www.icloud.com/shortcuts/3ccad90c297e43a38471e101177ccf80) |
+👉 Se snarveiens egen README for full dokumentasjon og installasjon.
 
 ---
 
@@ -67,8 +63,6 @@ Dette er alltid beskrevet i dokumentasjonen for hver snarvei.
 ios-shortcuts/
 ├─ shortcuts/        # .shortcut-filer
 ├─ docs/             # Felles dokumentasjon / maler
-├─ <snarvei>/        # Egen mappe per snarvei
-│  └─ README.md
 └─ README.md         # Denne filen
 ```
 
