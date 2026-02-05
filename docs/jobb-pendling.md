@@ -1,11 +1,24 @@
 # 🚗🚌🚲 Jobb pendling – iOS Snarvei
+
 [![Add to Shortcuts](https://img.shields.io/badge/Add%20to-Shortcuts-blue?logo=apple&logoColor=white)](https://www.icloud.com/shortcuts/3ccad90c297e43a38471e101177ccf80)
 [![View on GitHub](https://img.shields.io/badge/View-GitHub-black?logo=github)](https://github.com/FriedCurmudgeon/ios-shortcuts/blob/main/shortcuts/Jobb%20pendling.shortcut)
 
 En intelligent iOS-snarvei som samler **pendling, fokus-modus, varsling, navigasjon og underholdning** i én sømløs flyt.
-Designet for daglig bruk – med innebygde sjekker som hindrer feil fokus, overlapp og unødvendige avbrytelser.
 
-Snarveien tar hensyn til:
+Snarveien er laget for daglig bruk, med innebygde sjekker som hindrer:
+- feil fokus
+- overlappende kontekst
+- unødvendige avbrytelser
+
+Dette er ikke bare én snarvei, men et lite system bestående av:
+- én manuell snarvei (start på reisen)
+- automatisering ved ankomst jobb
+- automatisering ved hjemkomst
+
+---
+
+## 🧭 Hva snarveien tar hensyn til
+
 - Hvordan du reiser (bil, buss, sykkel, hjemmekontor)
 - Hvilket fokus som allerede er aktivt
 - Om noen skal varsles
@@ -14,69 +27,37 @@ Snarveien tar hensyn til:
 
 ---
 
-## Diagram
+## 📊 Flyt (oversikt)
 
-Flyt som viser hovedlogikken i snarveien, fra valg av transport til fokus, navigasjon og media.
+> Merk: Diagrammet rendres kun i GitHub som støtter Mermaid.
 
 ```mermaid
 flowchart TD
-    A[Start snarvei] --> B{Hvordan reiser du i dag?}
+    A([Start snarvei]) --> B{Transportvalg}
 
-    %% Transportvalg
-    B -->|Bil| C_Bil
-    B -->|Buss| C_Buss
-    B -->|Sykkel| C_Sykkel
-    B -->|Hjemmekontor| C_HK
-    B -->|Hjemme| C_Hjemme
+    B -->|Bil| BilStart
+    B -->|Buss| BussStart
+    B -->|Sykkel| SykkelStart
+    B -->|Hjemmekontor| HKStart
+    B -->|Hjemme| HjemmeStart
 
-    %% Bil
-    C_Bil --> D_BilFokus[Hent gjeldende fokus]
-    D_BilFokus -->|Jobb aktiv| E_BilOK[Aktiver 'Kjører']
-    D_BilFokus -->|Feil fokus| X_StopBil[Varsel + stopp]
-    E_BilOK --> F_BilMsg[Send melding]
-    F_BilMsg --> G_BilNav[Åpne Google Maps<br/>driving]
-    G_BilNav --> H_Media[Musikk eller Podcast]
+    BilStart --> BilFokus[Sett fokus: Kjører] --> BilNav[Åpne Google Maps (driving)] --> MediaValg{Musikk eller Podcast?}
+    BussStart --> BussFokus[Sett fokus: Busser] --> BussApp[Åpne Kolumbus] --> MediaValg
+    SykkelStart --> SykkelFokus[Sett fokus: Sykler] --> SykkelNav[Åpne Google Maps (bicycling)] --> MediaValg
 
-    %% Buss
-    C_Buss --> D_BussFokus[Hent gjeldende fokus]
-    D_BussFokus -->|Jobb aktiv| E_BussOK[Aktiver 'Busser']
-    D_BussFokus -->|Feil fokus| X_StopBuss[Varsel + stopp]
-    E_BussOK --> F_BussMsg[Send melding]
-    F_BussMsg --> G_BussApp[Åpne Kolumbus]
-    G_BussApp --> H_Media
+    MediaValg -->|Musikk| Spotify[Åpne Spotify]
+    MediaValg -->|Podcast| Podcaster[Åpne Podcaster]
 
-    %% Sykkel
-    C_Sykkel --> D_SykkelFokus[Hent gjeldende fokus]
-    D_SykkelFokus -->|Jobb aktiv| E_SykkelOK[Aktiver 'Sykler']
-    D_SykkelFokus -->|Feil fokus| X_StopSykkel[Varsel + stopp]
-    E_SykkelOK --> F_SykkelMsg[Send melding]
-    F_SykkelMsg --> G_SykkelNav[Åpne Google Maps<br/>bicycling]
-    G_SykkelNav --> H_Media
-
-    %% Media
-    H_Media -->|Musikk| I_Spotify[Åpne Spotify]
-    H_Media -->|Podcast| I_Podcast[Åpne Podcaster]
-
-    %% Hjemmekontor
-    C_HK --> D_HKFokus[Hent gjeldende fokus]
-    D_HKFokus -->|Transport-fokus aktiv| X_StopHK[Varsel + stopp]
-    D_HKFokus -->|Ingen konflikt| E_HKOK[Aktiver 'Hjemmekontor']
-    E_HKOK --> F_HKVarsel[Påminnelse: Oppdater kalender]
-
-    %% Hjemme
-    C_Hjemme --> D_HjemmeFokus[Hent gjeldende fokus]
-    D_HjemmeFokus -->|Transport-fokus aktiv| X_StopHjemme[Varsel + stopp]
-    D_HjemmeFokus -->|OK| E_HjemmeOK[Aktiver 'Hjemme']
+    HKStart --> HKFokus[Sett fokus: Hjemmekontor] --> HKVarsel[Vis påminnelse: Oppdater kalender]
+    HjemmeStart --> HjemmeFokus[Sett fokus: Hjemme]
 ```
 
-
-
-## ✨ Funksjoner
+## ✨ Funksjoner i snarveien
 
 ### 🚦 Transportvalg
 Ved start blir du spurt:
 
-> **Hvordan reiser du i dag?**
+**Hvordan reiser du i dag?**
 
 Tilgjengelige valg:
 - 🚗 Bil
@@ -90,12 +71,12 @@ Hvert valg har egen logikk for fokus, varsler og navigasjon.
 ---
 
 ### 🔔 Varsling
-Snarveien kan sende en forhåndsdefinert melding (SMS/iMessage) til valgt mottaker.
+Snarveien kan sende SMS/iMessage til en forhåndsvalgt mottaker.
 
 Eksempler:
-- «Kjører hjem 😊»
-- «Går til bussen 😅»
-- «Sykler hjem nå 🚴‍♂️»
+- Kjører hjem 😊
+- Går til bussen 😅
+- Sykler hjem nå 🚴‍♂️
 
 Meldingen genereres dynamisk basert på valgt transport.
 
@@ -104,17 +85,17 @@ Meldingen genereres dynamisk basert på valgt transport.
 ### 🧠 Fokus-modus (automatisk)
 Snarveien bruker **Hent gjeldende fokus** for å unngå konflikter.
 
-Fokus brukt:
-- **Kjører**
-- **Busser**
-- **Sykler**
-- **Jobb**
-- **Hjemmekontor**
-- **Hjemme**
+Fokus som benyttes:
+- Kjører
+- Busser
+- Sykler
+- Jobb
+- Hjemmekontor
+- Hjemme
 
 Regler:
-- Hvis riktig fokus allerede er aktivt → varsling vises
-- Hvis feil fokus er aktivt → snarveien stoppes
+- Riktig fokus allerede aktiv → kun varsling
+- Feil fokus aktiv → snarveien stoppes
 - Fokus aktiveres kun når ingen konflikter finnes
 
 Dette hindrer overlappende eller feilaktige fokus-endringer.
@@ -122,92 +103,132 @@ Dette hindrer overlappende eller feilaktige fokus-endringer.
 ---
 
 ### 🗺️ Navigasjon
-Navigasjon åpnes automatisk i **Google Maps** via URL-skjema:
+Navigasjon åpnes automatisk i **Google Maps**.
 
-- Bil: `directionsmode=driving`
-- Sykkel: `directionsmode=bicycling`
+- Bil: `driving`
+- Sykkel: `bicycling`
 
 Destinasjon settes dynamisk basert på:
-- Hjemadresse
-- Jobbadresse
+- hjemadresse
+- jobbadresse
 
 ---
 
 ### 🎧 Musikk eller podcast
 Etter at navigasjon er startet, blir du spurt:
 
-> **Vil du høre på musikk eller podcast?**
+**Vil du høre på musikk eller podcast?**
 
 Valg:
 - 🎵 Musikk → åpner Spotify
 - 🎙 Podcast → åpner Apple Podcaster
 
-Dette steget kjøres likt i alle transportgrener.
+Dette steget er felles for alle transportgrener.
 
 ---
 
 ### 🏠 Hjemmekontor / Hjemme
 Spesiallogikk:
 - Hjemmekontor kan kun aktiveres når ingen transport-fokus er aktive
-- Ved konflikt → tydelig varsel vises
+- Ved konflikt vises tydelig varsel
 - Brukeren minnes på å oppdatere kalender ved hjemmekontor
 
 ---
 
-## 🧩 Variabler
+## 🧩 Variabler brukt
 
-| Variabel | Beskrivelse |
-|--------|-------------|
-| `mottaker` | Kontakt som mottar melding |
-| `adresseHjem` | Hjemadresse |
-| `adresseJobb` | Jobbadresse |
-| `meldingTekst` | Dynamisk generert melding |
+- `mottaker` – kontakt som mottar melding  
+- `adresseHjem` – hjemadresse  
+- `adresseJobb` – jobbadresse  
+- `meldingTekst` – dynamisk generert meldingstekst  
+
+---
+
+## 🤖 Tilhørende automatiseringer
+
+### 📍 Når jeg ankommer jobb
+
+**Trigger**
+- Ankomst jobbadresse
+- Tidsrom: 05:00–14:00
+
+**Logikk**
+- Kjører kun hvis gjeldende fokus er Bilkjøring, Busser eller Sykler
+- Utføres kun på hverdager
+- Valgfri melding sendes ved sykkel
+- Transport-fokus avsluttes
+- Jobb-fokus aktiveres
+
+**Resultat**
+- Sømløs overgang fra pendling til arbeid
+- Tydelig varsel
+- Ingen manuell interaksjon
+
+---
+
+### 🏠 Når jeg kommer hjem
+
+**Trigger**
+- Ankomst hjemmeadresse
+- Tidsrom: 10:00–18:00
+
+**Logikk**
+- Stopper umiddelbart hvis fokus allerede er:
+  - Hjemme
+  - Hjemmekontor
+  - Soving
+  - Ferie
+- Avslutter kun transport-fokus
+- Aktiverer ingen nytt fokus
+
+**Resultat**
+- Ryddig avslutning av arbeidsdagen
+- Ingen jobb-kontekst henger igjen
+- Myk overgang til fritid
 
 ---
 
 ## 🛡️ Designvalg og robusthet
 
-- Ingen hardkodede meldinger i flere grener
 - Alle fokus-endringer er beskyttet av sjekker
-- Snarveien stopper seg selv ved konflikt
-- Gjenbruk av meny for musikk/podcast
+- Automatiseringer stopper seg selv ved konflikt
+- Ingen duplisert logikk på tvers av grener
+- Modulært oppsett: snarvei + automatiseringer
 
-Dette gjør snarveien:
-- Enkel å vedlikeholde
-- Trygg i daglig bruk
-- Lett å utvide
-
----
-
-## 🚀 Videre forbedringer (idéer)
-
-- Automatisk transportvalg basert på sted
-- Tidsstyrt varsling
-- Enkel logg av pendling
-- Kalender-integrasjon
+Dette gjør løsningen:
+- trygg i daglig bruk
+- lett å vedlikeholde
+- enkel å forstå for andre
 
 ---
 
-## ⬇️ Last ned snarveien
+## ⬇️ Installere snarveien
 
 ### 📲 Anbefalt (iPhone / iPad)
 Åpne lenken under på iPhone eller iPad for å legge snarveien direkte til i **Snarveier-appen**:
 
-👉 [Legg til «Jobb pendling» i Snarveier](https://www.icloud.com/shortcuts/3ccad90c297e43a38471e101177ccf80)
+👉 https://www.icloud.com/shortcuts/3ccad90c297e43a38471e101177ccf80
 
-Når lenken åpnes på iOS vil du bli spurt om å legge snarveien til.
-
-> ℹ️ Første gang du legger til snarveien må du kanskje tillate **Ubetrodde snarveier**  
-> Dette styres i **Innstillinger → Snarveier**.
+Første gang må du kanskje tillate **Ubetrodde snarveier**  
+(Innstillinger → Snarveier).
 
 ---
 
 ### 💾 Manuell nedlasting
-Hvis du heller vil laste ned filen manuelt (f.eks. for arkivering eller inspeksjon):
+Hvis du vil laste ned filen manuelt:
 
-👉 [Jobb pendling.shortcut](https://github.com/FriedCurmudgeon/ios-shortcuts/blob/main/shortcuts/Jobb%20pendling.shortcut)
+👉 https://github.com/FriedCurmudgeon/ios-shortcuts/blob/main/shortcuts/Jobb%20pendling.shortcut
 
-> Merk: Manuell nedlasting gir **ikke** automatisk «Legg til i Snarveier»-dialog.  
-> For best brukeropplevelse, bruk iCloud-lenken over.
+Manuell nedlasting gir ikke automatisk «Legg til i Snarveier»-dialog.
+
+---
+
+## 🚀 Videre idéer
+
+- Automatisk valg av transport basert på sted
+- Enkel logg over pendling
+- Kalender-integrasjon
+- Automatisering for «Når jeg forlater jobb»
+
 ---
 
