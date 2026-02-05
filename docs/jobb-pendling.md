@@ -41,15 +41,16 @@ flowchart TD
     B -->|Hjemmekontor| HKStart
     B -->|Hjemme| HjemmeStart
 
-    BilStart --> BilFokus[Sett fokus: Kjører] --> BilNav[Åpne Google Maps (driving)] --> MediaValg{Musikk eller Podcast?}
+    BilStart --> BilFokus[Sett fokus: Kjører] --> BilNav[Åpne Google Maps - driving] --> MediaValg{Musikk eller Podcast?}
     BussStart --> BussFokus[Sett fokus: Busser] --> BussApp[Åpne Kolumbus] --> MediaValg
-    SykkelStart --> SykkelFokus[Sett fokus: Sykler] --> SykkelNav[Åpne Google Maps (bicycling)] --> MediaValg
+    SykkelStart --> SykkelFokus[Sett fokus: Sykler] --> SykkelNav[Åpne Google Maps - bicycling] --> MediaValg
 
     MediaValg -->|Musikk| Spotify[Åpne Spotify]
     MediaValg -->|Podcast| Podcaster[Åpne Podcaster]
 
-    HKStart --> HKFokus[Sett fokus: Hjemmekontor] --> HKVarsel[Vis påminnelse: Oppdater kalender]
+    HKStart --> HKFokus[Sett fokus: Hjemmekontor] --> HKVarsel[Påminnelse: Oppdater kalender]
     HjemmeStart --> HjemmeFokus[Sett fokus: Hjemme]
+
 ```
 
 ## ✨ Funksjoner i snarveien
