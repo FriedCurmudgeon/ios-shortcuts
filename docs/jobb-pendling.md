@@ -165,6 +165,11 @@ Spesiallogikk:
 - Tydelig varsel
 - Ingen manuell interaksjon
 
+**Bilder av automasjonen**
+
+<img width="484" height="721" alt="image" src="https://github.com/user-attachments/assets/5b1ff203-9075-421c-b9c9-a9dd58319833" /><br><br>
+<img width="495" height="3174" alt="image" src="https://github.com/user-attachments/assets/b1318d86-6263-4089-9f09-550e97382b82" />
+
 ---
 
 ### 🏠 Når jeg kommer hjem
