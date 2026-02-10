@@ -143,7 +143,8 @@ Spesiallogikk:
 - `adresseJobb` – jobbadresse  
 - `meldingTekst` – dynamisk generert meldingstekst
 
-<img width="492" height="713" alt="image" src="https://github.com/user-attachments/assets/ea119da7-9637-4348-ad14-4646fd24eb3e" />
+<img width="492" height="713" alt="image" src="https://github.com/user-attachments/assets/ea119da7-9637-4348-ad14-4646fd24eb3e" /> <img width="492" height="393" alt="image" src="https://github.com/user-attachments/assets/f513bb20-a418-4375-a959-dd883ee861bb" />
+
 
 
 ---
