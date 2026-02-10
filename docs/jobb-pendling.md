@@ -167,7 +167,7 @@ Spesiallogikk:
 
 **Bilder av automasjonen**
 
-<img width="484" height="721" alt="image" src="https://github.com/user-attachments/assets/5b1ff203-9075-421c-b9c9-a9dd58319833" /><br><br>
+<img width="494" height="568" alt="image" src="https://github.com/user-attachments/assets/41db3c30-989f-4ecf-bac8-181989b57cd1" /><br><br>
 <img width="495" height="3174" alt="image" src="https://github.com/user-attachments/assets/b1318d86-6263-4089-9f09-550e97382b82" />
 
 ---
