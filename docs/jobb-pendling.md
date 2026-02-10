@@ -187,6 +187,10 @@ Spesiallogikk:
 - Ingen jobb-kontekst henger igjen
 - Myk overgang til fritid
 
+**Bilder av atumasajonen**
+<img width="486" height="535" alt="image" src="https://github.com/user-attachments/assets/2d41e2e6-475b-4818-a1a8-a7134f7e57d7" />
+<img width="492" height="1827" alt="image" src="https://github.com/user-attachments/assets/a0b25a66-873c-4419-819f-53b98abd1d62" />
+
 ---
 
 ## 🛡️ Designvalg og robusthet
