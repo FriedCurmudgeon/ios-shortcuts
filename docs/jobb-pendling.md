@@ -141,7 +141,10 @@ Spesiallogikk:
 - `mottaker` – kontakt som mottar melding  
 - `adresseHjem` – hjemadresse  
 - `adresseJobb` – jobbadresse  
-- `meldingTekst` – dynamisk generert meldingstekst  
+- `meldingTekst` – dynamisk generert meldingstekst
+
+<img width="492" height="713" alt="image" src="https://github.com/user-attachments/assets/ea119da7-9637-4348-ad14-4646fd24eb3e" />
+
 
 ---
 
